@@ -17,7 +17,7 @@ window.onload = () => {
       if (this.inputOne > 0 && this.inputTwo > 0) {
         return true;
       } else {
-        false;
+        return false;
       }
     }
   }
@@ -29,35 +29,40 @@ window.onload = () => {
 
   function inputGenerator(inputArray, obj) {
     inputArray.forEach(input => {
-      input.addEventListener('keyup', () => {
+
+      function getValue() {
         obj.inputOne = inputArray[0].value;
         obj.inputTwo = inputArray[1].value;
 
+        let resultCheker = obj.getResult()
+
         switch (obj) {
           case firstLine:
-            obj.getResult()
+            (resultCheker)
               ? firstLineValue.innerText = ((obj.inputOne * obj.inputTwo) / 100)
               : firstLineValue.innerText = '0';
             break;
           case secondLine:
-            obj.getResult()
+            (resultCheker)
               ? secondLineValue.innerText = ((obj.inputOne / obj.inputTwo) * 100)
               : secondLineValue.innerText = '0';
             break;
           case thirdLine:
-            obj.getResult()
+            (resultCheker)
               ? thirdLineValue.innerText = +obj.inputTwo + obj.inputOne * obj.inputTwo / 100
               : thirdLineValue.innerText = '0';
             break;
           case fourthLine:
-            obj.getResult()
+            (resultCheker)
               ? fourthLineValue.innerText = +obj.inputTwo - obj.inputOne * obj.inputTwo / 100
               : fourthLineValue.innerText = '0';
             break;
         }
+      }
 
-      })
-    })
+      input.addEventListener('keyup', getValue);
+
+    });
   };
 
   inputGenerator(firstLineInputs, firstLine);
